@@ -1,0 +1,10 @@
+.state-panel {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  list-style: none;
+
+  &__item {
+    width: 20%;
+  }
+}

@@ -1,5 +1,7 @@
 .block {
+  width: 30%;
   padding: 10px;
+  margin-bottom: 10px;
 
   &--selected {
     border: 1px solid black;
