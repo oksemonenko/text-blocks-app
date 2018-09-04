@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import createStore from "../store/createStore";
 import reducer from '../reducers';

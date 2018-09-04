@@ -29,7 +29,8 @@ const reducer = (state = [], action) => {
                 blockToChangeColor,
                 ...state.slice(action.payload + 1),
             ];
-
+        default:
+            return state;
     }
 };
 
