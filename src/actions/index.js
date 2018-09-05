@@ -11,7 +11,7 @@ export const removeBlock = index => ({
 });
 
 export const toggleSelectBlock = index => ({
-    type: ActionTypeEnum.TOGGLE_SELECT_BLOCK,
+    type: ActionTypeEnum.TOGGLE_SELECTION,
     payload: index
 });
 
