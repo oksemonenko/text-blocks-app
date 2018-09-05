@@ -9,29 +9,31 @@ import {
     toggleSelectBlock
 } from "../../actions";
 import {BlockColorEnum} from "../../enums/BlockColor.enum";
-import {BlockTypeEnum} from "../../enums/BlockType.enum";
 import Block from "../Block/Block";
 import StatePanel from "../StatePanel/StatePanel";
 
 class AppComponent extends Component {
 
-    render() {
-        const blocks = this.props.blocks;
+    getSelectedColorBlocks = (blocks, color) => {
+        return blocks.filter(block => {
+            if (block.color) {
+                return block.color === color;
+            }
+        });
+    };
 
-        const block = {
-            text: 'привет',
-            type: BlockTypeEnum.SIMPLE,
-            color: BlockColorEnum.GREEN,
-            selected: false
-        };
+    render() {
+        const {blocks} = this.props;
+
+        let block = new Block();
 
         const selectedBlocks = blocks.filter(block => block.selected);
 
         const blocksCount = {
             all: blocks.length,
             selected: selectedBlocks.length,
-            selectedRed: 0,
-            selectedGreen: 0,
+            selectedRed: this.getSelectedColorBlocks(selectedBlocks, BlockColorEnum.RED).length,
+            selectedGreen: this.getSelectedColorBlocks(selectedBlocks, BlockColorEnum.GREEN).length,
         };
 
         return (

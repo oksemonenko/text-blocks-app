@@ -1,4 +1,4 @@
 export const BlockColorEnum = {
-    RED: 'Red',
-    GREEN: 'Green'
+    RED: 'red',
+    GREEN: 'green'
 };

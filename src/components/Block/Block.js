@@ -2,8 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './Block.css';
+import {BlockTypeEnum} from "../../enums/BlockType.enum";
+import {BlockColorEnum} from "../../enums/BlockColor.enum";
 
 export default class Block extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.text = 'hello';
+
+        const blockTypes = [BlockTypeEnum.SIMPLE, BlockTypeEnum.COMPLICATED];
+        const type = blockTypes[Math.floor(Math.random() * blockTypes.length)];
+
+        this.type = type;
+        this.selected = false;
+
+        if (type === BlockTypeEnum.COMPLICATED) {
+            const blockColors = [BlockColorEnum.GREEN, BlockColorEnum.RED];
+
+            this.color = blockColors[Math.floor(Math.random() * blockColors.length)]
+        }
+    }
 
     static propTypes = {
         block: PropTypes.shape({
@@ -29,12 +48,15 @@ export default class Block extends React.Component {
 
     render() {
         const {block, index} = this.props;
-        const className = block.selected ? 'block block--selected' : 'block';
+        let className = block.selected ? 'block block--selected' : 'block';
+
+        className = block.color ? className +' block--' + block.color : className;
 
         return (
             <li className={className}
                 onClick={(e) => this.toggleSelectBlock(e, index)}>
                 <p>{block.text}</p>
+                <p>{block.type}</p>
                 <div>{index}</div>
                 <div>{block.selected}</div>
                 <button
