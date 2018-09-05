@@ -7,7 +7,7 @@ const store = createStore(reducer, []);
 
 const connect = (mapStateToProps, mapDispatchToProps) =>
     Component => {
-        return class extends React.Component {
+        return class Connect extends React.Component {
             render() {
                 return (
                     <Component
