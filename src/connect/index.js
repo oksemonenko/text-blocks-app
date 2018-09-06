@@ -2,8 +2,11 @@ import React from 'react';
 
 import createStore from "../store/createStore";
 import reducer from '../reducers';
+import generateBlocks from '../generateBlocks';
 
-const store = createStore(reducer, []);
+const blocks = generateBlocks();
+
+const store = createStore(reducer, blocks);
 
 const connect = (mapStateToProps, mapDispatchToProps) =>
     Component => {
