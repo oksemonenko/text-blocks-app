@@ -9,8 +9,8 @@ import {
     toggleSelectBlock
 } from "../../actions";
 import {BlockColorEnum} from "../../enums/BlockColor.enum";
-import Block from "../Block/Block";
-import StatePanel from "../StatePanel/StatePanel";
+import Block from "../../components/Block/Block";
+import StatePanel from "../../components/StatePanel/StatePanel";
 
 class AppComponent extends Component {
 
