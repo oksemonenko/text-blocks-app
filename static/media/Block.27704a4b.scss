@@ -1,0 +1,48 @@
+@import '../../styles/variables.scss';
+
+.block {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 2px solid rgba($color-gray, 0.5);
+  border-radius: 10px;
+  cursor: default;
+
+  &--selected {
+    border: 2px solid black;
+  }
+
+  &--green {
+    background-color: $bg-color-green;
+  }
+
+  &--red {
+    background-color: $bg-color-red;
+  }
+
+  &__text {
+    width: 90%;
+    word-wrap: break-word;
+  }
+}
+
+.remove-btn {
+  width: 30px;
+  margin-left: auto;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: rgba($color-black, 0.5);
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    color: rgba($color-black, 0.8);
+  }
+
+  &:active {
+    color: rgba($color-black, 1);
+  }
+}
