@@ -4,23 +4,19 @@ import PropTypes from 'prop-types';
 import './Block.css';
 import {BlockTypeEnum} from "../../enums/BlockType.enum";
 import {BlockColorEnum} from "../../enums/BlockColor.enum";
+import {MessagesEnum} from "../../enums/Messages.enum";
 
 export default class Block extends React.Component {
 
     constructor(props) {
         super(props);
-        this.text = 'hello';
+        this.text = this.generateBlockText();
 
-        const blockTypes = [BlockTypeEnum.SIMPLE, BlockTypeEnum.COMPLICATED];
-        const type = blockTypes[Math.floor(Math.random() * blockTypes.length)];
-
-        this.type = type;
+        this.type = this.generateBlockType();
         this.selected = false;
 
-        if (type === BlockTypeEnum.COMPLICATED) {
-            const blockColors = [BlockColorEnum.GREEN, BlockColorEnum.RED];
-
-            this.color = blockColors[Math.floor(Math.random() * blockColors.length)]
+        if (this.type === BlockTypeEnum.COMPLICATED) {
+            this.color = this.generateBlockColor();
         }
 
         this.timer = 0;
@@ -40,7 +36,41 @@ export default class Block extends React.Component {
         toggleSelectBlock: PropTypes.func.isRequired
     };
 
+    generateBlockText = () => {
+        let text = '';
+        const possible = 'abcdefghijklmnopqrstuvwxyz';
+
+        for (let i = 0; i < 100; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    };
+
+    generateBlockType = () => {
+        const blockTypes = [BlockTypeEnum.SIMPLE, BlockTypeEnum.COMPLICATED];
+        return blockTypes[Math.floor(Math.random() * blockTypes.length)];
+    };
+
+    generateBlockColor = () => {
+        const blockColors = [BlockColorEnum.GREEN, BlockColorEnum.RED];
+
+        return blockColors[Math.floor(Math.random() * blockColors.length)]
+    };
+
     removeBlock = (e, index) => {
+        const blockType = this.props.block.type;
+        if (blockType === BlockTypeEnum.COMPLICATED) {
+            const remove = window.confirm(MessagesEnum.CONFIRM_REMOVE_BLOCK_MESSAGE);
+            if (remove) {
+                this.props.removeBlock(index);
+                e.stopPropagation();
+                return;
+            }
+            else {
+                e.stopPropagation();
+                return;
+            }
+        }
         this.props.removeBlock(index);
         e.stopPropagation();
     };
@@ -82,10 +112,7 @@ export default class Block extends React.Component {
             <li className={className}
                 onClick={(e) => this.handleClick(e, index)}
                 onDoubleClick={(e) => this.handleDoubleClick(e, index)}>
-                <p>{block.text}</p>
-                <p>{block.type}</p>
-                <div>{index}</div>
-                <div>{block.selected}</div>
+                <p className='block__text'>{block.text}</p>
                 <button
                     className='remove-btn'
                     onClick={(e) => this.removeBlock(e, index)}>x</button>
