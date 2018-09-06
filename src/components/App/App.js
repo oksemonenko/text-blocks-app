@@ -14,6 +14,17 @@ import StatePanel from "../StatePanel/StatePanel";
 
 class AppComponent extends Component {
 
+    getBlocksCountObject = (blocks) => {
+        const selectedBlocks = blocks.filter(block => block.selected);
+
+        return {
+            All: blocks.length,
+            Selected: selectedBlocks.length,
+            Selected_Red: this.getSelectedColorBlocks(selectedBlocks, BlockColorEnum.RED).length,
+            Selected_Green: this.getSelectedColorBlocks(selectedBlocks, BlockColorEnum.GREEN).length,
+        };
+    };
+
     getSelectedColorBlocks = (blocks, color) => {
         return blocks.filter(block => {
             if (block.color) {
@@ -27,20 +38,11 @@ class AppComponent extends Component {
 
         let block = new Block();
 
-        const selectedBlocks = blocks.filter(block => block.selected);
-
-        const blocksCount = {
-            all: blocks.length,
-            selected: selectedBlocks.length,
-            selectedRed: this.getSelectedColorBlocks(selectedBlocks, BlockColorEnum.RED).length,
-            selectedGreen: this.getSelectedColorBlocks(selectedBlocks, BlockColorEnum.GREEN).length,
-        };
-
         return (
             <div className='app'>
-                <StatePanel blocksCount={blocksCount}/>
-                <button onClick={() => this.props.addBlock(block)}>Add block</button>
-                <ul>
+                <StatePanel blocksCount={this.getBlocksCountObject(blocks)}/>
+                <button className='add-btn' onClick={() => this.props.addBlock(block)}>Add block</button>
+                <ul className='blocks-container'>
                     {blocks.map((block, index) =>
                         <Block
                             key={index}
