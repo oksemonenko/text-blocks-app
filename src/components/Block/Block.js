@@ -22,6 +22,11 @@ export default class Block extends React.Component {
 
             this.color = blockColors[Math.floor(Math.random() * blockColors.length)]
         }
+
+        this.timer = 0;
+        this.prevent = false;
+        this.savedEvent = '';
+        this.savedTarget = '';
     }
 
     static propTypes = {
@@ -37,10 +42,31 @@ export default class Block extends React.Component {
 
     removeBlock = (e, index) => {
         this.props.removeBlock(index);
+        e.stopPropagation();
     };
 
-    toggleSelectBlock = (e,index) => {
-        if (e.target.classList.contains('remove-btn')) {
+    handleClick = (e, index) => {
+        this.savedEvent = e;
+        this.savedTarget = e.currentTarget;
+        const delay = 200;
+        let me = this;
+        this.timer = setTimeout(() => {
+            if (!this.prevent) {
+                me.toggleSelectBlock(e, index);
+            }
+            this.prevent = false;
+        }, delay);
+    };
+
+    handleDoubleClick = (e, index) => {
+        clearTimeout(this.timer);
+        this.prevent = true;
+        this.props.changeColor(index);
+    };
+
+    toggleSelectBlock = (e, index) => {
+        const target = this.savedTarget;
+        if (target.classList.contains('remove-btn')) {
             return;
         }
         this.props.toggleSelectBlock(index);
@@ -54,7 +80,8 @@ export default class Block extends React.Component {
 
         return (
             <li className={className}
-                onClick={(e) => this.toggleSelectBlock(e, index)}>
+                onClick={(e) => this.handleClick(e, index)}
+                onDoubleClick={(e) => this.handleDoubleClick(e, index)}>
                 <p>{block.text}</p>
                 <p>{block.type}</p>
                 <div>{index}</div>

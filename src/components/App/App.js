@@ -48,6 +48,7 @@ class AppComponent extends Component {
                             index={index}
                             removeBlock={this.props.removeBlock}
                             toggleSelectBlock={this.props.toggleSelectBlock}
+                            changeColor={this.props.changeColor}
                         />
                     )}
                 </ul>
