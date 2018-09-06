@@ -8,6 +8,10 @@
   padding: 20px;
   margin: auto;
   font-family: $font-family;
+
+  @media (min-width: 200px) and (max-width: 600px) {
+    width: 100%;
+  }
 }
 
 .blocks-container {
