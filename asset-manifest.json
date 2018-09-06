@@ -1,8 +1,7 @@
 {
-  "main.js": "static/js/main.8259526c.js",
-  "main.js.map": "static/js/main.8259526c.js.map",
-  "static/media/App.scss": "static/media/App.d543ab1e.scss",
-  "static/media/Block.scss": "static/media/Block.27704a4b.scss",
-  "static/media/StatePanel.scss": "static/media/StatePanel.93f6bfac.scss",
+  "main.css": "static/css/main.dba03768.css",
+  "main.css.map": "static/css/main.dba03768.css.map",
+  "main.js": "static/js/main.888663a5.js",
+  "main.js.map": "static/js/main.888663a5.js.map",
   "static/media/index.scss": "static/media/index.f8f5f925.scss"
 }
